@@ -4,6 +4,9 @@ import { ControlsView } from '../ControlsView';
 import { ParticipantView } from '../ParticipantView';
 import { StageProps } from '../StageProps';
 import styles from './styles.module.css';
+import { Button } from '@chakra-ui/react';
+import EgressHelper from '@livekit/egress-sdk'
+
 
 export const GridStage = ({
   roomState,
@@ -79,6 +82,14 @@ export const GridStage = ({
       newParticipants.splice(numVisible, newParticipants.length - numVisible);
     }
     setVisibleParticipants(newParticipants);
+
+    //EgressHelper
+    if (room) {  
+      EgressHelper.setRoom(room, {
+        autoEnd: true,
+      })
+    }
+    
   }, [participants]);
 
   if (error) {
@@ -98,6 +109,10 @@ export const GridStage = ({
 
   const ParticipantRenderer = participantRenderer ?? ParticipantView;
   const ControlRenderer = controlRenderer ?? ControlsView;
+
+  const sendMessage = () => {
+    EgressHelper.startRecording();
+  };
 
   return (
     // global container
@@ -121,6 +136,7 @@ export const GridStage = ({
       </div>
       <div className={styles.controlsArea}>
         <ControlRenderer room={room} onLeave={onLeave} />
+        <Button onClick={sendMessage}></Button>
       </div>
     </div>
   );

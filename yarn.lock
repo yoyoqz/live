@@ -2337,6 +2337,11 @@
   resolved "https://registry.npmmirror.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
+"@livekit/egress-sdk@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@livekit/egress-sdk/-/egress-sdk-0.1.2.tgz#70eb40524654a02383655fb9669edd835a5ccca8"
+  integrity sha512-q6rNxBIskR8L5Xbn9FGH5SXBBlFxgQZXIsAOgoRtjo29REHrqbRv8lylfygELx9HFTEbc5egdLpTxTs8WPENJg==
+
 "@livekit/livekit-chakra-theme@^1.4.0":
   version "1.4.16"
   resolved "https://registry.npmmirror.com/@livekit/livekit-chakra-theme/-/livekit-chakra-theme-1.4.16.tgz#02848672c8243f183d3a3c09a0ebc3137a6ee2ce"
