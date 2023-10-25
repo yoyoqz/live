@@ -1,7 +1,7 @@
-import { Box, Center, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Button, Center, Grid, GridItem } from '@chakra-ui/react';
 import { faCommentDots } from '@fortawesome/free-regular-svg-icons';
 import { faComment, faDesktop, faStop } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AudioSelectButton } from '../core/AudioSelectButton';
 import { ControlButton } from '../core/ControlButton';
 import { ControlsProps } from '../core/ControlsView';
@@ -10,6 +10,7 @@ import { useParticipant } from '../hooks/useParticipant';
 import styles from '../styles/Room.module.css';
 import ChatOverlay from './ChatOverlay';
 import { Table, Tbody, Td, Tr } from '@chakra-ui/react';
+import EgressHelper from '@livekit/egress-sdk'
 
 const Controls = ({ room, onLeave }: ControlsProps) => {
   const { cameraPublication: camPub } = useParticipant(room.localParticipant);
@@ -18,6 +19,16 @@ const Controls = ({ room, onLeave }: ControlsProps) => {
   const [screenButtonDisabled, setScreenButtonDisabled] = useState(false);
   const [isChatOpen, setChatOpen] = useState(false);
   const [numUnread, setNumUnread] = useState(0);
+
+  useEffect(() => {
+    EgressHelper.setRoom(room, {
+      autoEnd: true,
+    })
+  }, [room]);
+
+  const sendMessage = () => {
+    EgressHelper.startRecording();
+  };
 
   const startChat = () => {
     setChatOpen(true);
@@ -123,6 +134,9 @@ const Controls = ({ room, onLeave }: ControlsProps) => {
               }}
             />
             )}
+            </GridItem>
+            <GridItem>
+            <Button onClick={sendMessage}></Button>
             </GridItem>
           </Grid>
         </Box>
