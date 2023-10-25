@@ -73,7 +73,7 @@ const ActiveRoom = ({
       params.region = region;
     }
     console.log(params)
-    fetch('/home/api/token?' + new URLSearchParams(params))
+    fetch('/live/api/token?' + new URLSearchParams(params))
       .then((res) => res.json())
       .then((data: TokenResult) => {
         setTokenResult(data);

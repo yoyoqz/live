@@ -151,7 +151,7 @@ const Controls = ({ room, onLeave }: ControlsProps) => {
             )}
             </GridItem>
             <GridItem>
-            <Button onClick={sendMessage}></Button>
+            <ControlButton label="录制" onClick={sendMessage}></ControlButton>
             </GridItem>
           </Grid>
         </Box>

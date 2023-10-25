@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  assetPrefix: "/home/", //加前缀
-  basePath: "/home", //node
+  assetPrefix: "/live/", //加前缀
+  basePath: "/live", //node
   //distDir: "dist/pc",
 };
 
