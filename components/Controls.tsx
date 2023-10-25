@@ -10,7 +10,9 @@ import { useParticipant } from '../hooks/useParticipant';
 import styles from '../styles/Room.module.css';
 import ChatOverlay from './ChatOverlay';
 import { Table, Tbody, Td, Tr } from '@chakra-ui/react';
-import EgressHelper from '@livekit/egress-sdk'
+
+import {EgressClient, EncodedFileType} from 'livekit-server-sdk'
+import { getLiveKitURL } from '../lib/clients';
 
 const Controls = ({ room, onLeave }: ControlsProps) => {
   const { cameraPublication: camPub } = useParticipant(room.localParticipant);
@@ -20,14 +22,27 @@ const Controls = ({ room, onLeave }: ControlsProps) => {
   const [isChatOpen, setChatOpen] = useState(false);
   const [numUnread, setNumUnread] = useState(0);
 
-  useEffect(() => {
-    EgressHelper.setRoom(room, {
-      autoEnd: true,
-    })
-  }, [room]);
-
   const sendMessage = () => {
-    EgressHelper.startRecording();
+      const egressClient = new EgressClient(
+        getLiveKitURL(),
+        process.env.LIVEKIT_API_KEY,
+        process.env.LIVEKIT_API_SECRET
+    );
+
+    const output = {
+        fileType:  EncodedFileType.MP4,
+        //filepath: 'livekit-demo/room-composite-test.mp4',
+        s3: {
+            accessKey: '52K2CS7BHyB1GxPpNcSB',
+            secret:    'J4wtHbqmt6WAz5ulmmtNqMKaCmkRN9Mi3TfGFNlF',
+            region:    'us-east-1',
+            bucket:    'start',
+            endpoint:  '127.0.0.1:9090'
+        }
+    };
+
+    const info = egressClient.startRoomCompositeEgress(room.name, output);
+    //const egressID = info.egressId;
   };
 
   const startChat = () => {
