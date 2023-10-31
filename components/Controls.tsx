@@ -11,8 +11,11 @@ import styles from '../styles/Room.module.css';
 import ChatOverlay from './ChatOverlay';
 import { Table, Tbody, Td, Tr } from '@chakra-ui/react';
 
-import {EgressClient, EncodedFileType} from 'livekit-server-sdk'
-import { getLiveKitURL } from '../lib/clients';
+//import {EgressClient, EncodedFileType} from 'livekit-server-sdk'
+//import { getLiveKitURL2,getLiveAPIKEY,getLiveAPISECRET } from '../lib/clients';
+//import EgressHelper from '@livekit/egress-sdk'
+import { RoomEvent} from 'livekit-client';
+
 
 const Controls = ({ room, onLeave }: ControlsProps) => {
   const { cameraPublication: camPub } = useParticipant(room.localParticipant);
@@ -21,28 +24,48 @@ const Controls = ({ room, onLeave }: ControlsProps) => {
   const [screenButtonDisabled, setScreenButtonDisabled] = useState(false);
   const [isChatOpen, setChatOpen] = useState(false);
   const [numUnread, setNumUnread] = useState(0);
+/*
+  useEffect(() => {
+    EgressHelper.setRoom(room, {
+      autoEnd: true,
+    })
+    //console.log("setRoom" + EgressHelper.getAccessToken())   
+    //console.log("setRoom" + EgressHelper.getLiveKitURL())   
+     EgressHelper.startRecording();
+
+  }, [room]);
 
   const sendMessage = () => {
-      const egressClient = new EgressClient(
-        getLiveKitURL(),
-        process.env.LIVEKIT_API_KEY,
-        process.env.LIVEKIT_API_SECRET
-    );
-
-    const output = {
-        fileType:  EncodedFileType.MP4,
-        //filepath: 'livekit-demo/room-composite-test.mp4',
-        s3: {
-            accessKey: '52K2CS7BHyB1GxPpNcSB',
-            secret:    'J4wtHbqmt6WAz5ulmmtNqMKaCmkRN9Mi3TfGFNlF',
-            region:    'us-east-1',
-            bucket:    'start',
-            endpoint:  '127.0.0.1:9090'
+     EgressHelper.startRecording();
+      // start recording when there's already a track published
+      
+      console.log("setRoom" + EgressHelper.getAccessToken())   
+      let hasTrack = false;
+      for (const p of Array.from(room.participants.values())) {
+        if (p.tracks.size > 0) {
+          hasTrack = true;
+          break;
         }
-    };
+      }
 
-    const info = egressClient.startRoomCompositeEgress(room.name, output);
-    //const egressID = info.egressId;
+      if (hasTrack) {
+        EgressHelper.startRecording();
+        console.log("has track")
+      } else {
+        room.once(RoomEvent.TrackSubscribed, () => EgressHelper.startRecording());
+        console.log("no track")
+      }
+  };
+*/
+
+  const sendMessage = () => {
+      //const params: { [key: string]: string } = {
+      //  'roomName',
+      //};
+      var params = '?roomName='+ room.name;
+
+      fetch('/live/api/record?' + new URLSearchParams(params))
+      .then((res) => res.json())
   };
 
   const startChat = () => {

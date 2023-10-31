@@ -6,6 +6,9 @@ import ActiveRoom from '../../components/ActiveRoom';
 import PreJoin from '../../components/PreJoin';
 import { getRoomClient } from '../../lib/clients';
 import { SessionProps } from '../../lib/types';
+import { EncodedFileType, EgressClient } from 'livekit-server-sdk';
+import { getLiveKitURL } from '../../lib/clients';
+
 
 interface RoomProps {
   roomName: string;
@@ -32,6 +35,7 @@ const RoomPage = ({ roomName, region, numParticipants, turnServer, forceRelay }:
       });
     }
   }, [roomName, toast, router]);
+
 
   if (sessionProps) {
     return (
@@ -68,9 +72,32 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       },
     };
   }
+/*
+  const egressClient = new EgressClient(
+    getLiveKitURL(),
+    process.env.LIVEKIT_API_KEY,
+    process.env.LIVEKIT_API_SECRET
+  );
+*/
 
-  const client = getRoomClient();
-  const rooms = await client.listRooms([roomName]);
+/*
+    const output = {
+        fileType:  EncodedFileType.MP4,
+        //filepath: 'livekit-demo/room-composite-test.mp4',
+        s3: {
+            accessKey: '52K2CS7BHyB1GxPpNcSB',
+            secret:    'J4wtHbqmt6WAz5ulmmtNqMKaCmkRN9Mi3TfGFNlF',
+            region:    'us-east-1',
+            bucket:    'start',
+            endpoint:  '127.0.0.1:9090'
+        }
+    };
+
+    const info = egressClient.startRoomCompositeEgress(roomName, output);
+*/
+
+  const roomClient = getRoomClient();
+  const rooms = await roomClient.listRooms([roomName]);
   let numParticipants = 0;
   if (rooms.length > 0) {
     numParticipants = rooms[0].numParticipants;
@@ -80,6 +107,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     roomName,
     numParticipants,
   };
+
   if (typeof region === 'string') {
     props.region = region;
   }

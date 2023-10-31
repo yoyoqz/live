@@ -9,6 +9,7 @@ import { LiveKitRoom } from '../core/LiveKitRoom';
 import { SessionProps, TokenResult } from '../lib/types';
 import Controls from './Controls';
 import DebugOverlay from './DebugOverlay';
+import {EgressClient, EncodedFileType} from 'livekit-server-sdk'
 
 const ActiveRoom = ({
   roomName,
@@ -60,6 +61,33 @@ const ActiveRoom = ({
           },
         });
       });
+      console.log('room conncected');
+/*
+      const params: { [key: string]: string } = {
+        roomName,
+      };
+
+      fetch('/live/api/record?' + new URLSearchParams(params))
+      .then((res) => res.json())
+*/
+
+/*
+      const output = {
+        fileType:  EncodedFileType.MP4,
+        //filepath: 'livekit-demo/room-composite-test.mp4',
+        s3: {
+            accessKey: '52K2CS7BHyB1GxPpNcSB',
+            secret:    'J4wtHbqmt6WAz5ulmmtNqMKaCmkRN9Mi3TfGFNlF',
+            region:    'us-east-1',
+            bucket:    'start',
+            endpoint:  '127.0.0.1:9090'
+        }
+      };
+
+      if (client) { 
+         client.startRoomCompositeEgress(room.name, output, 'grid');
+      }
+*/
     },
     [audioTrack, videoTrack],
   );
@@ -93,6 +121,7 @@ const ActiveRoom = ({
       };
     }
   }, [displayOptions]);
+
 
   if (!tokenResult) {
     return <Box bg="cld.bg1" minH="100vh"></Box>;
