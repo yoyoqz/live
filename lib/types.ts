@@ -10,6 +10,10 @@ export interface SessionProps {
   forceRelay?: boolean;
 }
 
+export interface TokenResult {
+  url: string;
+  token: string;
+
 export interface RocordResult {
   egressId: string;
 }
