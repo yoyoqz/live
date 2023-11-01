@@ -13,6 +13,7 @@ export interface SessionProps {
 export interface TokenResult {
   url: string;
   token: string;
+}
 
 export interface RocordResult {
   egressId: string;
