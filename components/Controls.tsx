@@ -9,12 +9,8 @@ import { VideoSelectButton } from '../core/VideoSelectButton';
 import { useParticipant } from '../hooks/useParticipant';
 import styles from '../styles/Room.module.css';
 import ChatOverlay from './ChatOverlay';
-import { Table, Tbody, Td, Tr } from '@chakra-ui/react';
-
-//import {EgressClient, EncodedFileType} from 'livekit-server-sdk'
-//import { getLiveKitURL2,getLiveAPIKEY,getLiveAPISECRET } from '../lib/clients';
-//import EgressHelper from '@livekit/egress-sdk'
-import { RoomEvent} from 'livekit-client';
+//import { Table, Tbody, Td, Tr } from '@chakra-ui/react';
+import { RocordResult } from '../lib/types';
 
 
 const Controls = ({ room, onLeave }: ControlsProps) => {
@@ -24,48 +20,24 @@ const Controls = ({ room, onLeave }: ControlsProps) => {
   const [screenButtonDisabled, setScreenButtonDisabled] = useState(false);
   const [isChatOpen, setChatOpen] = useState(false);
   const [numUnread, setNumUnread] = useState(0);
-/*
-  useEffect(() => {
-    EgressHelper.setRoom(room, {
-      autoEnd: true,
-    })
-    //console.log("setRoom" + EgressHelper.getAccessToken())   
-    //console.log("setRoom" + EgressHelper.getLiveKitURL())   
-     EgressHelper.startRecording();
 
-  }, [room]);
+  let egressId = ""
 
-  const sendMessage = () => {
-     EgressHelper.startRecording();
-      // start recording when there's already a track published
-      
-      console.log("setRoom" + EgressHelper.getAccessToken())   
-      let hasTrack = false;
-      for (const p of Array.from(room.participants.values())) {
-        if (p.tracks.size > 0) {
-          hasTrack = true;
-          break;
-        }
-      }
+  const onStop = () => {
+    var params = '?egressID='+ egressId;
 
-      if (hasTrack) {
-        EgressHelper.startRecording();
-        console.log("has track")
-      } else {
-        room.once(RoomEvent.TrackSubscribed, () => EgressHelper.startRecording());
-        console.log("no track")
-      }
-  };
-*/
+    fetch('/live/api/stop_record?' + new URLSearchParams(params))
+    .then((res) => res.json())
+  }
 
-  const sendMessage = () => {
-      //const params: { [key: string]: string } = {
-      //  'roomName',
-      //};
+  const onStart = () => {
       var params = '?roomName='+ room.name;
 
-      fetch('/live/api/record?' + new URLSearchParams(params))
+      fetch('/live/api/start_record?' + new URLSearchParams(params))
       .then((res) => res.json())
+      .then((data: RocordResult) => {
+        egressId = data.egressId
+      });
   };
 
   const startChat = () => {
@@ -174,8 +146,11 @@ const Controls = ({ room, onLeave }: ControlsProps) => {
             )}
             </GridItem>
             <GridItem>
-            <ControlButton label="录制" onClick={sendMessage}></ControlButton>
+            <ControlButton label="录制" onClick={onStart}></ControlButton>
             </GridItem>
+            <GridItem>
+            <ControlButton label="停止" onClick={onStop}></ControlButton>
+            </GridItem>            
           </Grid>
         </Box>
         <Box>  
@@ -195,62 +170,4 @@ const Controls = ({ room, onLeave }: ControlsProps) => {
   )
 };
 
-/*
-  return (
-    <>
-      <Table variant="simple" minH="60%">
-        <Tbody>
-          <Tr>
-            <Td>{muteButton}</Td>
-            <Td>{videoButton}</Td>
-          </Tr>
-          <Tr>
-            <Td>{screenButton}</Td>
-            <Td>        
-              {onLeave && (
-              <ControlButton
-                label="End"
-                className={styles.dangerButton}
-                onClick={() => {
-                  room.disconnect();
-                  onLeave(room);
-                }}
-              />)}  
-              </Td>
-          </Tr>
-        </Tbody>
-      </Table>
-      <ChatOverlay
-        room={room}
-        isOpen={isChatOpen}
-        onUnreadChanged={setNumUnread}
-        onClose={() => {
-          setChatOpen(false);
-        }}
-      />
-    </>
-  );
-};
-*/
-
 export default Controls;
-/*
- *
-      <HStack>
-        {muteButton}
-        {videoButton}
-        {screenButton}
-        {chatButton}
-        {onLeave && (
-          <ControlButton
-            label="End"
-            className={styles.dangerButton}
-            onClick={() => {
-              room.disconnect();
-              onLeave(room);
-            }}
-          />
-        )}
-      </HStack>
- */
-

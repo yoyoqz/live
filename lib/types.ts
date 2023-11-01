@@ -1,5 +1,4 @@
 import { LocalAudioTrack, LocalVideoTrack } from 'livekit-client';
-import { EgressClient } from 'livekit-server-sdk';
 
 export interface SessionProps {
   roomName: string;
@@ -11,11 +10,10 @@ export interface SessionProps {
   forceRelay?: boolean;
 }
 
-export interface TokenResult {
-  url: string;
-  token: string;
+export interface RocordResult {
+  egressId: string;
 }
 
-export interface RocordResult {
-  url: string;
+export interface StopRecord {
+  egressId: string;
 }

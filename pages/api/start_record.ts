@@ -1,3 +1,4 @@
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { EgressClient, EncodedFileType } from 'livekit-server-sdk';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getLiveKitURL } from '../../lib/clients';
@@ -5,8 +6,7 @@ import { RocordResult } from '../../lib/types';
 
 const roomPattern = /\w{4}\-\w{4}/;
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<RocordResult>) {
-
+export default async function handler(req: NextApiRequest, res: NextApiResponse<RocordResult>) {
     const roomName = req.query.roomName as string | undefined;
 
     if (!roomName) {
@@ -35,15 +35,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Rocord
             region:    'us-east-1',
             bucket:    'start',
             endpoint:  '43.155.87.113:9090',
-	    force_path_style: true
+			force_path_style: true
         }
     };
-    
-    console.log("start egress")
-    const info = egressClient.startRoomCompositeEgress(roomName, output);
 
-    res.status(200).json({
-        url: "",
-    });
+    const info = await egressClient.startRoomCompositeEgress(roomName, output);
+    if (info.egressId) {
+        res.status(200).json({
+            egressId: info.egressId
+        });
+    } else {
+        res.status(200).json({
+            egressId: ""
+        });
+    }
 }
-
