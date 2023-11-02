@@ -69,8 +69,6 @@ export const SpeakerStage = ({
         orientation="landscape"
         showOverlay={showOverlay}
         showConnectionQuality
-        onMouseEnter={() => setShowOverlay(true)}
-        onMouseLeave={() => setShowOverlay(false)}
       />
     );
   }
@@ -90,8 +88,6 @@ export const SpeakerStage = ({
                 aspectWidth={16}
                 aspectHeight={9}
                 showOverlay={showOverlay}
-                onMouseEnter={() => setShowOverlay(true)}
-                onMouseLeave={() => setShowOverlay(false)}
               />
             );
           })}

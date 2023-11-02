@@ -71,8 +71,6 @@ export const MobileStage = ({
         height="90%"
         orientation="portrait"
         showConnectionQuality
-        onMouseEnter={() => setShowOverlay(true)}
-        onMouseLeave={() => setShowOverlay(false)}
       />
     );
   }
