@@ -20,11 +20,13 @@ const Controls = ({ room, onLeave }: ControlsProps) => {
   const [screenButtonDisabled, setScreenButtonDisabled] = useState(false);
   const [isChatOpen, setChatOpen] = useState(false);
   const [numUnread, setNumUnread] = useState(0);
+  const [egressid, setEgressid] = useState("");
 
   let egressId = ""
 
   const onStop = () => {
-    var params = '?egressID='+ egressId;
+    var params = '?egressID='+ egressid;
+    console.log(params);
 
     fetch('/live/api/stop_record?' + new URLSearchParams(params))
     .then((res) => res.json())
@@ -36,7 +38,7 @@ const Controls = ({ room, onLeave }: ControlsProps) => {
       fetch('/live/api/start_record?' + new URLSearchParams(params))
       .then((res) => res.json())
       .then((data: RocordResult) => {
-        egressId = data.egressId
+        setEgressid(data.egressId)
       });
   };
 
@@ -128,7 +130,7 @@ const Controls = ({ room, onLeave }: ControlsProps) => {
           <Grid
             mt="0.75rem"
             gap="0.5rem"
-            templateColumns="min-content min-content min-content"
+            templateColumns="min-content min-content min-content min-content"
             placeContent="end center">
             <GridItem>
             {chatButton}
