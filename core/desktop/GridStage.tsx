@@ -128,8 +128,6 @@ export const GridStage = ({
               height="100%"
               showOverlay={showOverlay}
               showConnectionQuality
-              onMouseEnter={() => setShowOverlay(true)}
-              onMouseLeave={() => setShowOverlay(false)}
             />
           );
         })}
