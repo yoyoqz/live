@@ -10,6 +10,10 @@ const Home: NextPage = () => {
     router.push(`/rooms/${generateRoomId()}`);
   };
 
+  const startFLV = () => {
+    router.push(`/flv/${generateRoomId()}`);
+  };  
+
   return (
     <Box className={styles.container} bg="cld.bg1" minW="100%" minH="100%">
       <main>
@@ -26,6 +30,18 @@ const Home: NextPage = () => {
         >
     	开始会议
         </Button>
+
+        <Button
+          onClick={startFLV}
+          variant="primary"
+          py="0.75rem"
+          px="1rem"
+          {...typography.textStyles['h5-mono']}
+          _hover={{ backgroundColor: '#4963B0' }}
+        >
+    	开始直播
+        </Button>
+
       </main>
     </Box>
   );
