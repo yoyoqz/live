@@ -7137,10 +7137,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.npmmirror.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
-livekit-client@1.4.3:
-  version "1.4.3"
-  resolved "https://registry.npmmirror.com/livekit-client/-/livekit-client-1.4.3.tgz#da72f2fefc415d97d0126b4b5bace1ad2d3c00f6"
-  integrity sha512-+NU9vcjrwTI5wZHTg25rXWdn++9/qTFDuvTudW13uqS53PmNOxDI3QpP3zt9bw5P+9Ai6K5O8ZwoMvsQuUJChQ==
+livekit-client@1.7.0:
+  version "1.7.0"
+  resolved "https://registry.npmmirror.com/livekit-client/-/livekit-client-1.7.0.tgz#7090599bb3ce06b585830c0e9535641fade3c827"
+  integrity sha512-LXjSNc+7mkptjMzG3kgWk/SfiME0Ug1GPt8niK55S7ht5gYpncwPIg/N+QqLJqn2YpYVT827bK6sExX7Vlt/vQ==
   dependencies:
     async-await-queue "^1.2.1"
     events "^3.3.0"
@@ -10002,10 +10002,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@4.6.2:
-  version "4.6.2"
-  resolved "https://registry.npmmirror.com/typescript/-/typescript-4.6.2.tgz#fe12d2727b708f4eef40f51598b3398baa9611d4"
-  integrity sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==
+typescript@4.9.5:
+  version "4.9.5"
+  resolved "https://registry.npmmirror.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
+  integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
 ua-parser-js@^1.0.2:
   version "1.0.35"

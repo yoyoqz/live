@@ -22,3 +22,10 @@ export interface RocordResult {
 export interface StopRecord {
   egressId: string;
 }
+
+export interface FlvResult {
+  ingressId?: string;
+  name?: string;
+  streamKey?: string;
+  url?: string;
+}

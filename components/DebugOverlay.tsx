@@ -82,14 +82,14 @@ export const DebugOverlay = ({ room }: DebugProps) => {
     if (isReconnect && room.engine) {
       toast({
         title: 'Reconnecting...',
-        description: `current server: ${room.engine.connectedServerAddress}`,
+        description: `current server: ${room.engine.getConnectedServerAddress()}`,
         status: 'info',
         duration: 3000,
       });
       room.once(RoomEvent.Reconnected, () => {
         toast({
           title: 'Reconnected',
-          description: `reconnected server: ${room.engine.connectedServerAddress}`,
+          description: `reconnected server: ${room.engine.getConnectedServerAddress()}`,
           status: 'success',
           duration: 3000,
         });

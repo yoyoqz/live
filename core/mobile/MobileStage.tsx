@@ -1,5 +1,5 @@
 import { Participant, Track, VideoTrack } from 'livekit-client';
-import React, { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { ControlsView } from '../ControlsView';
 import { ParticipantView } from '../ParticipantView';
 import { ScreenShareView } from '../ScreenShareView';
@@ -61,11 +61,10 @@ export const MobileStage = ({
   } else if (otherParticipants.length === 0) {
     mainView = <div>no one is in the room</div>;
   } else {
-    [participantInFocus, ...otherParticipants] = otherParticipants;
     mainView = (
       <ParticipantRenderer
-        key={participantInFocus.identity}
-        participant={participantInFocus}
+        key={room.localParticipant.identity}
+        participant={room.localParticipant}
         showOverlay={showOverlay}
         width="90%"
         height="90%"
