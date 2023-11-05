@@ -41,13 +41,6 @@ const RoomPage = ({ roomName, url, streamKey}: FlvProps) => {
     );
 };
 
-/*
-    roomName,
-    url,
-    streamKey
-
-
-*/
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const roomName = context.params?.name;

@@ -1,4 +1,4 @@
-import { Box, HStack } from '@chakra-ui/react';
+import { Text, VStack } from '@chakra-ui/react';
 
 /*
       <HStack spacing="0">
@@ -24,17 +24,17 @@ interface FlvControlsProps{
 const FlvControls = ({ roomName, url,  streamKey }: FlvControlsProps) => {
 
   return (
-    <HStack spacing='24px'>
-      <Box w='40px' h='40px' bg='yellow.200'>
+    <VStack spacing='24px'>
+      <Text>
         {url}
-      </Box>
-      <Box w='40px' h='40px' bg='tomato'>
+      </Text>
+      <Text w='200px' h='40px' bg='tomato'>
         {roomName}
-      </Box>
-      <Box w='40px' h='40px' bg='pink.100'>
+      </Text>
+      <Text w='200px' h='40px' bg='pink.100'>
         {streamKey}
-      </Box>
-    </HStack>
+      </Text>
+    </VStack>
   )
 };
 
